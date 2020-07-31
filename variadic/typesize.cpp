@@ -1,5 +1,7 @@
 #include<iostream>
 #include<string>
+#include<vector>
+#include<list>
 
 template<typename H, typename ...T>
 void print_type()
@@ -12,5 +14,6 @@ void print_type()
 int main()
 {
 	print_type<char, bool, short, int, long, char*>();
+	print_type<std::vector<int>, std::list<int>, std::string>();
 	return 0;
 }
