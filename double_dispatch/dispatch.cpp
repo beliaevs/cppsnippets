@@ -86,10 +86,9 @@ namespace Formats
 	};
 }
 
-namespace DataA
+namespace A1
 {
 	struct DataA1 {};
-	struct DataA2 {};
 
 	DataA1 parse(const Formats::F1&, Parse::To<DataA1>)
 	{
@@ -97,15 +96,20 @@ namespace DataA
 		return {};
 	}
 
-	DataA2 parse(const Formats::F1&, Parse::To<DataA2>)
-	{
-		std::cout << "DataA2 parse(F1)\n";
-		return {};
-	}
-
 	DataA1 parse(const Formats::F2&, Parse::To<DataA1>)
 	{
 		std::cout << "DataA1 parse(F2)\n";
+		return {};
+	}
+}
+
+namespace A2
+{
+	struct DataA2 {};
+
+	DataA2 parse(const Formats::F1&, Parse::To<DataA2>)
+	{
+		std::cout << "DataA2 parse(F1)\n";
 		return {};
 	}
 
@@ -128,8 +132,8 @@ int main()
 	Formats::F1 format1;
 	Formats::F2 format2;
 
-	format1.As<DataA::DataA1>();
-	format1.As<DataA::DataA2>();
-	format2.As<DataA::DataA1>();
-	format2.As<DataA::DataA2>();
+	format1.As<A1::DataA1>();
+	format1.As<A2::DataA2>();
+	format2.As<A1::DataA1>();
+	format2.As<A2::DataA2>();
 }
