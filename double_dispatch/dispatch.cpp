@@ -1,6 +1,8 @@
 #include<iostream>
 #include<vector>
 
+// inspired by presentation of Anton Polukhin "Taxi C++ tricks"
+
 namespace A
 {
 	struct S {};
