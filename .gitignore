@@ -3,5 +3,7 @@ x64
 *.vcxproj.user
 Debug
 Release
+*.exe
+
 
 
