@@ -4,6 +4,9 @@ x64
 Debug
 Release
 *.exe
+*.o
+*.obj
+
 
 
 
