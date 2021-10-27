@@ -6,6 +6,7 @@ Release
 *.exe
 *.o
 *.obj
+all.py
 
 
 
