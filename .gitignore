@@ -8,6 +8,7 @@ Release
 *.obj
 all.py
 *_build
+build
 
 
 
