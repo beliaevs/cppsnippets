@@ -15,13 +15,13 @@
             "name": "Windows",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:/Boost/include/boost-1_76"
+                "C:/Boost/include/boost-1_77"
             ],
             "defines": [],
             "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/VC/Tools/MSVC/14.28.29910/bin/Hostx86/x86/cl.exe",
             "cStandard": "c11",
             "cppStandard": "c++17",
-            "intelliSenseMode":"msvc-x64"
+            "intelliSenseMode": "msvc-x64"
         }
     ],
     "version": 4
