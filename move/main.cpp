@@ -52,7 +52,7 @@ private:
 
 Spy getSpy()
 {
-	std::string name = "Mata Hari";
+	std::string name = "Mata Hari jsjsjjjskjahjskdghjshgajhsdhjksjhaksjdgjhghjasjkhdjkjasjhdghjhasdgh";
 	Spy spy(name);
 	return spy;
 }
@@ -68,12 +68,12 @@ std::string getStr()
 int main()
 {
 	{ //spy test
-		const auto& s = getSpy().name(); // UB???
-		std::cout << s << "\n";
+		const auto& s = getSpy().name();
+		std::cout << s << "\n"; // UB !!! const ref does not prolong life of the temporary 
 	}
 	{
 		Cont cont;
-		std::string str = "hellohellohellohellohello";
+		const std::string str = "hellohellohellohellohello";
 		std::cout << mem(str) << "\n";
 		cont.insert(std::move(str));
 		cont.insert(getStr());

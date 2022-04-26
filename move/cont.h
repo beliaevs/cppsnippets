@@ -28,6 +28,12 @@ class Cont
         vals.push_back(std::move(i_str));
     }
 
+    void insert(const std::string&& i_str)
+    {
+        std::cout << "insert const&&\n" << "\n";
+        vals.push_back(i_str);
+    }
+
     void print() const
     {
         std::cout << "Cont:\n";
