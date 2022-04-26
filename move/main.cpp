@@ -8,7 +8,7 @@ public:
 	Spy() = default;
 	explicit Spy(std::string i_name): d_name(std::move(i_name)) 
 	{
-		std::cout << "Spy from string(" << i_name << ")\n";
+		std::cout << "Spy from string(" << d_name << ")\n";
 	}
 
 	Spy(const Spy& other) : d_name(other.d_name)
@@ -52,7 +52,8 @@ private:
 Spy getSpy()
 {
 	std::string name = "Mata Hari";
-	return Spy(name);
+	Spy spy(name);
+	return spy;
 }
 
 int main()
