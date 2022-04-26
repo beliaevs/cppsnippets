@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<string>
+#include "cont.h"
 
 class Spy
 {
@@ -56,9 +57,26 @@ Spy getSpy()
 	return spy;
 }
 
+std::string getStr()
+{
+	std::string ret("string 1 string 1 string 1 string 1 string 1");
+	std::cout << "getStr:\n";
+	std::cout << mem(ret) << '\n';
+	return ret;
+}
+
 int main()
 {
 	{ //spy test
-		std::cout << getSpy().name() << "\n"; // UB???
+		const auto& s = getSpy().name(); // UB???
+		std::cout << s << "\n";
+	}
+	{
+		Cont cont;
+		std::string str = "hellohellohellohellohello";
+		std::cout << mem(str) << "\n";
+		cont.insert(std::move(str));
+		cont.insert(getStr());
+		cont.print();
 	}
 }
