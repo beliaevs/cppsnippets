@@ -3,6 +3,7 @@
 #include<string>
 #include<vector>
 #include<sstream>
+#include"util.h"
 
 inline std::string mem(const std::string& i_str)
 {
@@ -30,6 +31,31 @@ class ContT
     {
         // it works if you have to create a copy anyway
         vals.push_back(std::move(v));
+    }
+
+    // not recommended
+    template<typename Pred>
+    bool insertIf(T v, Pred p)
+    {
+        if(p(v))
+        {
+            vals.push_back(std::move(v));
+            return true;
+        }
+        return false;
+    }
+
+    template<typename U, typename Pred>
+    bool insertIf1(U&& v, Pred p) // universal or forwarding reference
+    {
+        print_typename<U>();
+        if(p(v))
+        {
+            vals.push_back(std::forward<U>(v));
+            // vals.push_back(std::move(v)); // danger! insertIf1(a) will leave a empty without notice 
+            return true;
+        }
+        return false;
     }
 
     void print() const

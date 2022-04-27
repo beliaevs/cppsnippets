@@ -1,7 +1,7 @@
 GCCFLAGS=-std=c++17 -Wall -pedantic -Wextra
 CLANGFLAGS=-std=c++17 -Wall -pedantic -Wextra -Wc++17-compat-pedantic
 CPPFILES=main.cpp
-HFILES=cont.h
+HFILES=cont.h util.h
 
 all: move.exe cmove.exe
 

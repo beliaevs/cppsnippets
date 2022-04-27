@@ -57,7 +57,11 @@ private:
 
 class SpyHolder
 {
-	// 
+	// Don't take by value and move if you:
+	// 1. set an existing value (move assignment vs move constructor + move assignment)
+	// 2. might not adopt
+	// 3. move is expensive
+	//
 	// holder.setSpy(spy);
 	// could have difficulty of 
 	// 1. "spy copy" + "spy move assignment" or
@@ -140,5 +144,30 @@ int main()
 		bs.insert(true);
 		bs.insert(false);
 		bs.print();
+
+		ContT<Spy> cia;
+		Spy myspy("zorge");
+		cia.insert(std::move(myspy));
+		Spy otherspy("avva");
+		// expensive: copy even if the spy is not inserted
+		cia.insertIf(otherspy, [](const Spy& a){ return a.name().length() > 5; });
+		// ok, copy + move in case of insertion
+		cia.insertIf(otherspy, [](const Spy& a){ return !a.name().empty() && a.name()[0] == 'a'; });
+	}
+	{
+		ContT<Spy> cia;
+		Spy myspy("Zorge");
+		// nothing happens!
+		// non-const lvalue
+		// U->Spy&
+		cia.insertIf1(myspy, [](const Spy& a){ return !a.name().empty() && a.name()[0] == 'a';});
+		// Ok, only copy
+		const Spy otherspy("Z");
+		// const lvalue
+		// U->const Spy&
+		cia.insertIf1(otherspy, [](const Spy& a){ return !a.name().empty() && a.name()[0] == 'Z';});
+		// rvalue
+        // U->Spy
+		cia.insertIf1(Spy("Hi"), [](const Spy&) {return true; });
 	}
 }
