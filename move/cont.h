@@ -4,12 +4,44 @@
 #include<vector>
 #include<sstream>
 
-std::string mem(const std::string& i_str)
+inline std::string mem(const std::string& i_str)
 {
     std::stringstream ss;
-    ss << (void*)i_str.c_str() << ": " << i_str;
+    ss << static_cast<const void*>(i_str.c_str()) << ": " << i_str;
     return ss.str();
 }
+
+template<typename T>
+std::string mem(const T& arg)
+{
+    std::stringstream ss;
+    ss << static_cast<const void*>(std::addressof(arg)) << ": " << arg << "\n";
+    return ss.str();
+}
+
+template<typename T>
+class ContT
+{
+    std::vector<T> vals;
+
+    public:
+    ContT() = default;
+    void insert(T v)
+    {
+        // it works if you have to create a copy anyway
+        vals.push_back(std::move(v));
+    }
+
+    void print() const
+    {
+        std::cout << "ContT<>:\n";
+
+        for(const auto& v: vals)
+        {
+            std::cout << "> " << mem(v) << '\n';
+        }
+    }
+};
 
 class Cont
 {
@@ -42,6 +74,5 @@ class Cont
         {
             std::cout << "> " << mem(v) << '\n';
         }
-        
     }
 };
