@@ -58,6 +58,16 @@ class ContT
         return false;
     }
 
+    template<typename Pred, typename... U>
+    void insertIfV(Pred p, U&&... v)
+    {
+        auto push = [&](auto&& x){
+            if(p(std::forward<decltype(x)>(x))){
+                vals.push_back(std::forward<decltype(x)>(x));
+            }
+        };
+        (..., push(std::forward<U>(v)));
+    }
     void print() const
     {
         std::cout << "ContT<>:\n";

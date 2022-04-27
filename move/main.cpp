@@ -170,4 +170,11 @@ int main()
         // U->Spy
 		cia.insertIf1(Spy("Hi"), [](const Spy&) {return true; });
 	}
+	{ // multiple push
+	  // whats happening here is unclear
+		ContT<Spy> cia;
+		Spy mata("Mata Hari");
+		const Spy philby("Philby");
+		cia.insertIfV([](const Spy&){ return true;}, Spy("Vasya"), mata, philby);
+	}
 }
