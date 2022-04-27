@@ -66,6 +66,7 @@ class ContT
                 vals.push_back(std::forward<decltype(x)>(x));
             }
         };
+        vals.reserve(vals.size() + sizeof...(U));
         (..., push(std::forward<U>(v)));
     }
     void print() const
