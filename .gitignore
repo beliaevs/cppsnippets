@@ -9,8 +9,7 @@ Release
 all.py
 *_build
 build
-
-
+.vscode
 
 
 
