@@ -114,20 +114,19 @@ static std::string getStr()
 int main()
 {
     {
+        std::cout << "------- Move spies into the holder -------\n";
         SpyHolder holder;
         holder.setSpy(getSpy());
         Spy myspy("My personal spy");
         holder.setSpy(std::move(myspy));
     }
     {
-    // floating point test
-        std::cout << "FLT_EVAL_METHOD: " << FLT_EVAL_METHOD << "\n";
-    }
-    { //spy test
+        std::cout << "-------Undefined behaviour ------\n";
         const auto& s = getSpy().name();
         std::cout << s << "\n"; // UB !!! const ref does not prolong life of the temporary 
     }
     {
+        std::cout << "--------move string into container --------\n";
         Cont cont;
         const std::string str = "hellohellohellohellohello";
         std::cout << mem(str) << "\n";
@@ -136,6 +135,7 @@ int main()
         cont.print();
     }
     {
+        std::cout << "-------conditional insertion difficulty------\n";
         ContT<std::string> txt;
         txt.insert(getStr());
         txt.print();
@@ -155,6 +155,7 @@ int main()
         cia.insertIf(otherspy, [](const Spy& a){ return !a.name().empty() && a.name()[0] == 'a'; });
     }
     {
+        std::cout << "-------conditional insertion with forwarding reference ------\n";
         ContT<Spy> cia;
         Spy myspy("Zorge");
         // nothing happens!
@@ -170,8 +171,8 @@ int main()
         // U->Spy
         cia.insertIf1(Spy("Hi"), [](const Spy&) {return true; });
     }
-    { // multiple push
-      // whats happening here is unclear
+    { 
+        std::cout << "---------variadic conditional insert with forwarding references-----\n";
         ContT<Spy> cia;
         Spy mata("Mata Hari");
         const Spy philby("Philby");

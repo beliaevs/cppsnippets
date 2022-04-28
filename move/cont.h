@@ -2,23 +2,7 @@
 
 #include<string>
 #include<vector>
-#include<sstream>
 #include"util.h"
-
-inline std::string mem(const std::string& i_str)
-{
-    std::stringstream ss;
-    ss << static_cast<const void*>(i_str.c_str()) << ": " << i_str;
-    return ss.str();
-}
-
-template<typename T>
-std::string mem(const T& arg)
-{
-    std::stringstream ss;
-    ss << static_cast<const void*>(std::addressof(arg)) << ": " << arg << "\n";
-    return ss.str();
-}
 
 template<typename T>
 class ContT
