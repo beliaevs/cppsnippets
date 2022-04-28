@@ -1,42 +1,69 @@
 #include<iostream>
-#include<vector>
+#include<boost/type_index.hpp>
+#include<array>
 
-//initialization test
-class A 
+class NoCopyMove
 {
     public:
-    explicit A(int a, double b): d_n(a), d_d(b) { std::cout << "A::A(int, double)\n"; }
-    private:
-    int d_n;
-    double d_d;
+    NoCopyMove() = default;
+    NoCopyMove(const NoCopyMove&) = delete;
+    NoCopyMove(NoCopyMove&&) = delete;
 };
 
-class B 
+void f(NoCopyMove)
 {
-    public:
-    B(int a, double b): d_n(a), d_d(b) { std::cout << "B::B(int, double)\n"; }
-    private:
-    int d_n;
-    double d_d;
-};
 
+}
+
+NoCopyMove bar()
+{
+    return NoCopyMove();
+}
+/*
+NoCopyMove baz()
+{
+    NoCopyMove res;
+    return res; // error: non temporary requires copy/move available
+}
+*/
 int main()
 {
-    A a1(2, 4.3);
-    // A a2 = {3, 4.5}; does not compile
-
-    B b1(4, 2.12);
-    B b2 = {5, 7.3};
-
-    std::vector<int> vec1(3); // size - 3
-    std::vector<int> vec2{3}; // one-element
-    std::cout << "vec1: \n";
-    for(auto n: vec1)
-        std::cout << n << " ";
-    std::cout << "\nvec2: \n";
-    for(auto n: vec2)
-        std::cout << n << " ";
-    std::cout << "\n";
-
-    return 0;
+    { // int
+        int i1; // undefined
+        int i2 = 42;
+        int i3(42);
+        int i4 = int(); // inits with 0
+        int i5{42};
+        int i6 = {42};
+        int i7{};
+        int i8 = {};
+        auto i9 = 42;
+        auto i10{42}; // defect in c++11: std::initializer_list<int>
+                      // c++14: int
+                     
+        std::cout << boost::typeindex::type_id<decltype(i10)>().pretty_name() << "\n";  // fixed even in c++11 mode
+        auto i11 = {42}; // initializer_list<int>
+        std::cout << boost::typeindex::type_id<decltype(i11)>().pretty_name() << "\n";
+        auto i12 = int{42};
+        // int i13(); // function
+        //std::cout << boost::typeindex::type_id<decltype(i13)>().pretty_name() << "\n";
+    }
+    {
+        auto i = 42;
+        auto v = 42l;
+        std::cout << boost::typeindex::type_id<decltype(v)>().pretty_name() << "\n";
+        auto a = 42ll;
+        std::cout << boost::typeindex::type_id<decltype(a)>().pretty_name() << "\n";
+        using namespace std::literals;
+        auto s = "sasha"s;
+        std::cout << boost::typeindex::type_id<decltype(s)>().pretty_name() << "\n";
+        auto r = std::array{1, 4, 2, 3}; // c++17 is ok: mandatory RVO and copy elision
+    }
+    {
+        NoCopyMove a;
+        // f(a); // error, no copy
+        f(NoCopyMove()); // c++17 - ok c++14 - error, no move
+        auto b = bar(); // ok
+        // auto c = baz(); // error - named value return
+    }
 }
