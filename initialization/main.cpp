@@ -55,7 +55,7 @@ int main()
     {
         NoCopyMove a;
         //f(a); // error, use of deleted function ‘NoCopyMove::NoCopyMove(const NoCopyMove&)
-        f(NoCopyMove()); // c++17 - ok, c++14 - error, no move
+        //f(NoCopyMove()); // c++17 - ok, c++14 - error, no move
         auto b = bar(); //  c++17 - ok, c++14 - error
         // auto c = baz(); // error - named value return
         extfoo(NoCopyMove());
