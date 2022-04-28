@@ -1,24 +1,17 @@
 #include<iostream>
 #include<boost/type_index.hpp>
 #include<array>
-
-class NoCopyMove
-{
-    public:
-    NoCopyMove() = default;
-    NoCopyMove(const NoCopyMove&) = delete;
-    NoCopyMove(NoCopyMove&&) = delete;
-};
+#include "util.h"
 
 void f(NoCopyMove)
 {
-
 }
 
 NoCopyMove bar()
 {
     return NoCopyMove();
 }
+
 /*
 NoCopyMove baz()
 {
@@ -61,9 +54,11 @@ int main()
     }
     {
         NoCopyMove a;
-        // f(a); // error, no copy
-        f(NoCopyMove()); // c++17 - ok c++14 - error, no move
-        auto b = bar(); // ok
+        //f(a); // error, use of deleted function ‘NoCopyMove::NoCopyMove(const NoCopyMove&)
+        f(NoCopyMove()); // c++17 - ok, c++14 - error, no move
+        auto b = bar(); //  c++17 - ok, c++14 - error
         // auto c = baz(); // error - named value return
+        extfoo(NoCopyMove());
+        auto d = extbar();
     }
 }
