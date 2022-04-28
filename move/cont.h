@@ -53,6 +53,33 @@ class ContT
         vals.reserve(vals.size() + sizeof...(U));
         (..., push(std::forward<U>(v)));
     }
+
+    void setAll(const T& v)
+    {
+        for(auto&& e: vals) // works even for vector<bool>
+            e = v;
+    }
+
+    std::vector<T> getValues() const // safe but slow
+    {
+        return vals;
+    }
+
+    const std::vector<T>& getValuesFlawed() const
+    {
+        return vals;
+    }
+
+    const std::vector<T>& getValuesRight() const&
+    {
+        return vals;
+    }
+
+    std::vector<T> getValuesRight() &&
+    {
+        return std::move(vals);
+    }
+
     void print() const
     {
         std::cout << "ContT<>:\n";

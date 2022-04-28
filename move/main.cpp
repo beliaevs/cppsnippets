@@ -29,15 +29,15 @@ public:
 
     Spy& operator = (const Spy& rhs)
     {
+        std::cout << "Spy assign: " << d_name << " = " <<  rhs.d_name << "\n";
         d_name = rhs.d_name;
-        std::cout << "Spy assign(" << d_name << ")\n";
         return *this;
     }
 
     Spy& operator = (Spy&& rhs)
     {
+        std::cout << "Spy move-assign: " << d_name << " = " <<  rhs.d_name << "\n";
         d_name = std::move(rhs.d_name);
-        std::cout << "Spy move-assign(" << d_name << ")\n";
         return *this;
     }
 
@@ -111,6 +111,13 @@ static std::string getStr()
     return ret;
 }
 
+ContT<Spy> getSpyCont()
+{
+    ContT<Spy> res;
+    res.insertIfV([](const auto&){ return true; }, Spy("First spy"), Spy("Second spy"), Spy("Third spy"));
+    return res;
+}
+
 int main()
 {
     {
@@ -177,5 +184,32 @@ int main()
         Spy mata("Mata Hari");
         const Spy philby("Philby");
         cia.insertIfV([](const Spy&){ return true;}, Spy("Vasya"), mata, philby);
+    }
+    {
+        std::cout << "---------vector<bool> disaster----------------------\n";
+        ContT<bool> bc;
+        bc.insert(true);
+        bc.insert(true);
+        bc.setAll(false); //error if for(auto& e: vals) e = ...
+        ContT<Spy> cia;
+        cia.insert(Spy("007"));
+        cia.setAll(Spy("xaxam"));
+    }
+    {
+        std::cout << "--------getters test------------------------------\n";
+        ContT<Spy> cia;
+        cia.insertIfV([](const auto&){ return true; }, Spy("spy1"), Spy("Spy2"), Spy("spy3"));
+        std::cout << cia.getValues().size() << "\n"; // unnesessary vector copy!
+        std::cout << cia.getValuesFlawed().size() << "\n"; // no vector copy
+        // UB!!!! Crash!!!!
+        ///for(const auto& s: getSpyCont().getValuesFlawed())
+        ///{
+        ///    std::cout << s.name() << "\n";
+        ///}
+        for(const auto& s: getSpyCont().getValuesRight())
+        {
+            std::cout << s.name() << "\n";
+        }
+        auto spies = std::move(cia).getValuesRight();
     }
 }
