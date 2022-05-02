@@ -72,9 +72,9 @@ int main()
         };
         std::vector<std::string> a1 = {"hello", "world"};
         show(a1);
-        std::vector<std::string> a2 = {{"hello", "world"}};
+        std::vector<std::string> a2 = {{"world", "hello", "goodbye"}};
         show(a2);
-        std::vector<std::string> a3 = {{{"hello", "world"}}};
-        show(a3);
+        //std::vector<std::string> a3 = {{{"hello", "world", "goodbye"}}};
+        //show(a3);
     }
 }
