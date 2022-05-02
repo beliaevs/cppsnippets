@@ -1,4 +1,6 @@
 #include<iostream>
+#include<string>
+#include<vector>
 #include<boost/type_index.hpp>
 #include<array>
 #include "util.h"
@@ -60,5 +62,19 @@ int main()
         // auto c = baz(); // error - named value return
         extfoo(NoCopyMove());
         auto d = extbar();
+    }
+    {
+        auto show = [](const auto& cont) { 
+            for(const auto& e: cont) {
+                std::cout << e << " ";
+            }; 
+            std::cout << "\n"; 
+        };
+        std::vector<std::string> a1 = {"hello", "world"};
+        show(a1);
+        std::vector<std::string> a2 = {{"hello", "world"}};
+        show(a2);
+        std::vector<std::string> a3 = {{{"hello", "world"}}};
+        show(a3);
     }
 }
