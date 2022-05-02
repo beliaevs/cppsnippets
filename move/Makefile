@@ -15,3 +15,6 @@ clean:
 	rm move.exe
 	rm cmove.exe
 
+rvalue_refs.exe: rvalue_refs.cpp Makefile
+	g++ -o rvalue_refs.exe $(GCCFLAGS) rvalue_refs.cpp
+
