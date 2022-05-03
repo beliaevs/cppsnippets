@@ -1,9 +1,9 @@
-GCCFLAGS=-std=c++17 -Wall -pedantic -Wextra
+GCCFLAGS=-std=c++20 -Wall -pedantic -Wextra
 CLANGFLAGS=-std=c++17 -Wall -pedantic -Wextra -Wc++17-compat-pedantic
 CPPFILES=main.cpp
 HFILES=cont.h util.h
 
-all: move.exe cmove.exe
+all: move.exe cmove.exe rvalue_refs.exe forward.exe
 
 move.exe: $(CPPFILES) $(HFILES) Makefile
 	g++ -o move.exe $(GCCFLAGS) $(CPPFILES)
@@ -18,3 +18,5 @@ clean:
 rvalue_refs.exe: rvalue_refs.cpp Makefile
 	g++ -o rvalue_refs.exe $(GCCFLAGS) rvalue_refs.cpp
 
+forward.exe: forward.cpp Makefile
+	g++ -o forward.exe $(GCCFLAGS) forward.cpp
