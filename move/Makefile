@@ -14,6 +14,9 @@ cmove.exe: $(CPPFILES) $(HFILES) Makefile
 clean:
 	rm move.exe
 	rm cmove.exe
+	rm rvalue_refs.exe
+	rm forward.exe
+	rm default_members.exe
 
 rvalue_refs.exe: rvalue_refs.cpp Makefile
 	g++ -o rvalue_refs.exe $(GCCFLAGS) rvalue_refs.cpp
@@ -23,4 +26,3 @@ forward.exe: forward.cpp Makefile
 
 default_members.exe: default_members.cpp spy.h Makefile
 	g++ -o default_members.exe $(GCCFLAGS) default_members.cpp
-	
