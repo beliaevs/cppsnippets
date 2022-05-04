@@ -3,7 +3,7 @@ CLANGFLAGS=-std=c++17 -Wall -pedantic -Wextra -Wc++17-compat-pedantic
 CPPFILES=main.cpp
 HFILES=cont.h util.h
 
-all: move.exe cmove.exe rvalue_refs.exe forward.exe
+all: move.exe cmove.exe rvalue_refs.exe forward.exe default_members.exe
 
 move.exe: $(CPPFILES) $(HFILES) Makefile
 	g++ -o move.exe $(GCCFLAGS) $(CPPFILES)
@@ -20,3 +20,7 @@ rvalue_refs.exe: rvalue_refs.cpp Makefile
 
 forward.exe: forward.cpp Makefile
 	g++ -o forward.exe $(GCCFLAGS) forward.cpp
+
+default_members.exe: default_members.cpp spy.h Makefile
+	g++ -o default_members.exe $(GCCFLAGS) default_members.cpp
+	

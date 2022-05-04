@@ -1,26 +1,7 @@
 #include<iostream>
 #include<boost/type_index.hpp>
 #include<string>
-class Spy
-{
-    public:
-    explicit Spy(std::string name): d_name(std::move(name))
-    {
-        std::cout << "Spy(" << d_name << ")\n";
-    }
-
-    ~Spy()
-    {
-        std::cout << "~Spy(" << d_name << ")\n";
-    }
-
-    void show() const
-    {
-        std::cout << "Spy> " << d_name << "\n";
-    }
-    private:
-    std::string d_name;
-};
+#include"spy.h"
 
 Spy getSpy()
 {
@@ -52,6 +33,7 @@ int main()
         const int ca = 32;
         int& ra = a; //ok
         const int& cra = ca; //ok
+        std::cout << "cra = " << cra << "\n";
         //int& ra2 = ca;//error: binding reference of type ‘int&’ to ‘const int’ discards qualifiers
         //int&& rra = a; //error: cannot bind rvalue reference of type ‘int&&’ to lvalue of type ‘int’
         //int& ra2 = getInt(); //error: cannot bind non-const lvalue reference of type ‘int&’ to an rvalue of type ‘int’
