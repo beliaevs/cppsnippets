@@ -45,6 +45,8 @@ public:
         std::cout << "~Spy(" << d_name << ")\n";
     }
 
+    // dangerous const ref return
+    // crash when called on temporary objects
     const std::string& name() const
     {
         return d_name;
