@@ -3,7 +3,7 @@ CLANGFLAGS=-std=c++17 -Wall -pedantic -Wextra -Wc++17-compat-pedantic
 CPPFILES=main.cpp
 HFILES=cont.h util.h
 
-all: move.exe cmove.exe rvalue_refs.exe forward.exe default_members.exe
+all: move.exe cmove.exe rvalue_refs.exe forward.exe default_members.exe expression_category.exe
 
 move.exe: $(CPPFILES) $(HFILES) Makefile
 	g++ -o move.exe $(GCCFLAGS) $(CPPFILES)
@@ -26,3 +26,6 @@ forward.exe: forward.cpp Makefile
 
 default_members.exe: default_members.cpp spy.h Makefile
 	g++ -o default_members.exe $(GCCFLAGS) default_members.cpp
+
+expression_category.exe: expression_category.cpp Makefile
+	g++ -o expression_category.exe $(GCCFLAGS) expression_category.cpp
