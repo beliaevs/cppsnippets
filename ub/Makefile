@@ -17,4 +17,5 @@ tidy: main.cpp
 clean:
 	rm ub.exe
 	rm constref.exe
+	rm nullptr.exe
 
