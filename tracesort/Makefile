@@ -1,4 +1,4 @@
-tracesort.exe: tracesort.cpp Makefile
+tracesort.exe: tracesort.cpp quadratic.h Makefile
 	g++ -o tracesort.exe -Wall -Wpedantic -Wextra tracesort.cpp
 
 clean:
