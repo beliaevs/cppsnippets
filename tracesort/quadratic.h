@@ -19,11 +19,12 @@ void insertion_sort(It first, It last, Pred p)
     if (p(element, *first))
     {
       // insert element on the first place
-      for (; cur != first; --cur, --prev)
+      for (; prev != first; --cur, --prev)
       {
         *cur = *prev;
       }
-      *cur = element;
+      *cur = *prev;
+      *prev = element;
     }
     else
     {
@@ -35,11 +36,10 @@ void insertion_sort(It first, It last, Pred p)
         }
         else
         {
-          *prev = element;
+          *cur = element;
           break;
         }
       }
-      *cur = element;
     }
   }
 }
