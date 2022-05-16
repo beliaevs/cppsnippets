@@ -15,12 +15,9 @@ public:
 class B
 {
 public:
-  B(int n) : d_n(n)
+  B()
   {
   }
-
-private:
-  int d_n;
 };
 
 template<typename T>
@@ -43,10 +40,23 @@ int main()
   printTraitsForAll<int, bool, A, B>();
 
   {
-    Table t({ "type", "is_integral", "is_floating_point", "is_class" });
-    t.addRow("int", { std::is_integral_v<int>, std::is_floating_point_v<int>, std::is_class_v<int> });
-    t.addRow("double", { std::is_integral_v<double>, std::is_floating_point_v<double>, std::is_class_v<double> });
-    t.addRow("A", { std::is_integral_v<A>, std::is_floating_point_v<A>, std::is_class_v<A> });
+    Table t({ "type", "is_integral", "is_floating_point", "is_class", "is_trivially_constructible" });
+    t.addRow("int",
+             { std::is_integral_v<int>,
+               std::is_floating_point_v<int>,
+               std::is_class_v<int>,
+               std::is_trivially_constructible_v<int> });
+    t.addRow("double",
+             { std::is_integral_v<double>,
+               std::is_floating_point_v<double>,
+               std::is_class_v<double>,
+               std::is_trivially_constructible_v<double> });
+    t.addRow(
+      "A",
+      { std::is_integral_v<A>, std::is_floating_point_v<A>, std::is_class_v<A>, std::is_trivially_constructible_v<A> });
+    t.addRow(
+      "B",
+      { std::is_integral_v<B>, std::is_floating_point_v<B>, std::is_class_v<B>, std::is_trivially_constructible_v<B> });
     t.print(std::cout);
   }
   return 0;
