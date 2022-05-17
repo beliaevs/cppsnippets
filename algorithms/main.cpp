@@ -40,5 +40,17 @@ int main()
     std::cout << "after merge:\n";
     printSeq(v);
   }
+  {
+    // sort-like operations
+    std::vector<int> v = { 9, 3, 5, 7, 2, 4, 6, 8, 0, 1 };
+    std::cout << "initial seq:\n";
+    printSeq(v);
+    std::nth_element(v.begin(), v.begin() + 2, v.end());
+    std::cout << "nth-element (2):\n";
+    printSeq(v);
+    std::partial_sort(v.begin(), v.begin() + 5, v.end());
+    std::cout << "then partial_sort(5):\n";
+    printSeq(v);
+  }
   return 0;
 }
