@@ -2,18 +2,17 @@
 #include <list>
 #include <vector>
 #include <iostream>
+#include "registry.h"
+#include "utility.h"
 
 int main()
 {
-  // lambda utilities
-  auto printSeq = [](auto&& seq) {
-    for (auto&& e : seq)
-    {
-      std::cout << e << " ";
-    }
-    std::cout << "\n";
-  };
-
+  {  // run registered tests
+    std::cout << "\033[1;32mRun Registered Tests\033[0m\n";
+    Registry::run<RegistryID::Tests>();
+    std::cout << "\033[1;32mRun Registered Demos\033[0m\n";
+    Registry::run<RegistryID::Demos>();
+  }
   // testing various algorithm groups
   {
     // heaps
