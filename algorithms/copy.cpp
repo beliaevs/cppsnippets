@@ -6,7 +6,7 @@
 
 void copy_tests()
 {
-  std::cout << "copy tests\n";
+  std::cout << fancyLine("copy tests", CharColor::Cyan) << "\n";
   std::vector<int> v{ 1, 3, 2, 4 };
   std::cout << "Initial:\n";
   printSeq(v);
@@ -16,11 +16,11 @@ void copy_tests()
   printSeq(w);
 }
 
+static Registrator<RegistryID::Tests> reg1(copy_tests);
+
 void copy_demos()
 {
-  std::cout << "copy demos\n";
+  std::cout << fancyLine("copy demos", CharColor::Cyan) << "\n";
 }
 
-Registrator<RegistryID::Tests> reg1(copy_tests);
-
-Registrator<RegistryID::Demos> reg2(copy_demos);
+static Registrator<RegistryID::Demos> reg2(copy_demos);
