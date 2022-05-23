@@ -5,10 +5,10 @@
 int main()
 {
   using namespace std::chrono_literals;
-  // std::atomic<int> n(0);
-  int n = 0;
+  std::atomic<int> n(0);
+  //int n = 0;
   auto f = [&n](int t) {
-    ++n;
+    n.fetch_add(1, std::memory_order_relaxed);
     std::this_thread::sleep_for(std::chrono::duration<int, std::milli>(t));
   };
 
