@@ -10,3 +10,4 @@ main.exe: main.cpp Makefile
 
 clean:
 	rm main.exe
+	rm benchmark_test.exe
