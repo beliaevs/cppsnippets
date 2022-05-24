@@ -27,7 +27,7 @@ void BM_add_multiply(benchmark::State& state)
   for(int i = 0; i < N; ++i)
   {
     v1.push_back(std::rand());
-    v1.push_back(std::rand());
+    v2.push_back(std::rand());
   }
   auto* p1 = v1.data();
   auto* p2 = v2.data();
@@ -35,7 +35,7 @@ void BM_add_multiply(benchmark::State& state)
   for (auto _ : state)
   {
     unsigned long a1 = 0, a2 = 0;
-    for (size_t i = 0; i < N; ++i)
+    for (size_t i = 0; i != N; ++i)
     {
       a1 += p1[i] + p2[i];
       a2 += p1[i] * p2[i];
@@ -46,7 +46,48 @@ void BM_add_multiply(benchmark::State& state)
   }
   state.SetItemsProcessed(N * state.iterations());
 }
-
 BENCHMARK(BM_add_multiply);
 
+void BM_Memory_read(benchmark::State& state)
+{ 
+  volatile int* p = new int(42);
+  for(auto _: state)
+  {
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+    benchmark::DoNotOptimize(*p);
+  }
+  delete p;
+  state.SetItemsProcessed(32*state.iterations());
+}
+BENCHMARK(BM_Memory_read);
 // BENCHMARK_MAIN();
