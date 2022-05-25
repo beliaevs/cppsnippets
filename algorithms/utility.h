@@ -37,6 +37,6 @@ void printSeq(Seq&& seq)
     std::cout << e << " ";
   }
   std::cout << "\n";
-};
+}
 
 std::string fancyLine(std::string s, CharColor color = CharColor::White, Effect eff = Effect::Bold);
