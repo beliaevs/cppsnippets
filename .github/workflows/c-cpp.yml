@@ -18,5 +18,9 @@ jobs:
       with:
         version: 11
         platform: x64
+        
+    - name: boost
+      run: sudo apt-get update && sudo apt-get install -yq libboost-dev
+      
     - name: make
       run: make
