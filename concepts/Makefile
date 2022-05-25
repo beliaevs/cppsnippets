@@ -21,7 +21,7 @@ warnings=-Wall -Weffc++ -pedantic  \
 -Wwrite-strings 
 
 main.exe: main.cpp
-	g++-10 -o main.exe -std=c++20 $(warnings) main.cpp
+	g++ -o main.exe -std=c++20 $(warnings) main.cpp
 
 clean:
 	rm main.exe

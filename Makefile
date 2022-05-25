@@ -1,0 +1,29 @@
+all: 
+	cd algorithms; make; cd ..
+	cd bits; make; cd ..
+	cd boost_signals; make; cd ..
+	cd boostversion; make; cd ..
+	cd charconv; make; cd ..
+	cd concepts; make; cd ..
+	cd copy_elision; make; cd ..
+	cd formatted_output; make; cd ..
+	cd gcc_warnings; make; cd ..
+	cd initialization; make; cd ..
+	cd lambdas; make; cd ..
+	cd literals; make; cd ..
+	cd move; make; cd ..
+	cd numerics; make; cd ..
+	cd operators; make; cd ..
+	cd pikus_branchless; make; cd ..
+	cd ranges_test; make; cd ..
+	cd regexp; make; cd ..
+	cd streams; make; cd ..
+	cd structured_bindings; make; cd ..
+	cd template_specialization; make; cd ..
+	cd template_template; make; cd ..
+	cd tracesort; make; cd ..
+	cd type_traits; make; cd ..
+	cd ub; make; cd ..
+	cd unordered; make; cd ..
+	cd variadic; make; cd ..
+
