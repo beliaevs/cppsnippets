@@ -1,5 +1,8 @@
 WARNINGS=-Wall -Wpedantic -Wextra
 OPT = -O3
+
+minimal: main.exe threads.exe
+
 all: main.exe benchmark_test.exe threads.exe
 
 benchmark_test.exe: benchmark_test.cpp Makefile
