@@ -14,6 +14,7 @@ all:
 	cd move; make; cd ..
 	cd numerics; make; cd ..
 	cd operators; make; cd ..
+	cd pikus_atomics; make; cd ..
 	cd pikus_branchless; make; cd ..
 	cd ranges_test; make; cd ..
 	cd regexp; make; cd ..
