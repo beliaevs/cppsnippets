@@ -52,6 +52,7 @@ private:
 
 int main()
 {
+  std::cout << "Hardware concurrency: " << std::thread::hardware_concurrency() << "\n";
   ThreadSpy a("initial"), b("argument");
   std::cout << "creating lambda\n";
   auto f = [a](ThreadSpy arg) { std::cout << a.getFullName() << ", " << arg.getFullName() << "\n"; };
