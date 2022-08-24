@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 project(gtest_sample)
 
 # GoogleTest requires at least C++11
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -15,7 +15,9 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 enable_testing()
-
+set(BOOST_ROOT "C:/Boost")
+find_package(Boost REQUIRED)
+INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 add_executable(
   hello_test
   hello_test.cpp
