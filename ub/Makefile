@@ -1,6 +1,6 @@
 ASAN_OPTS=-fsanitize=address
 
-all: ub.exe constref.exe nullptr.exe intoverflow.exe intoverflow_clang.exe
+all: ub.exe constref.exe nullptr.exe intoverflow.exe intoverflow_clang.exe ubsan.exe
 
 ub.exe: main.cpp Makefile
 	g++ -o ub.exe -std=c++17 -Og -Wall -pedantic -Wextra main.cpp
@@ -17,6 +17,9 @@ intoverflow.exe: intoverflow.cpp Makefile
 intoverflow_clang.exe: intoverflow.cpp Makefile
 	clang++ -o intoverflow_clang.exe -O3 intoverflow.cpp
 
+ubsan.exe: ubsan.cpp Makefile
+	clang++ -o ubsan.exe -fsanitize=undefined ubsan.cpp 
+
 tidy: main.cpp
 	clang-tidy main.cpp -header-filter=.* -checks=bugprone*,readability*,portability*,misc*
 
@@ -26,4 +29,6 @@ clean:
 	rm nullptr.exe
 	rm intoverflow.exe
 	rm intoverflow_clang.exe
+	rm *.o 
+	rm ubsan.exe
 
