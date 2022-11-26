@@ -1,5 +1,5 @@
 CC=g++
-CCFLAGS=-std=c++17 -Wall -pedantic -Wextra
+CCFLAGS=-std=c++20 -Wall -pedantic -Wextra
 TARGETS=main.exe lambda.exe
 
 all: $(TARGETS)
